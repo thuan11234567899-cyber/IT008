@@ -1,0 +1,161 @@
+﻿<Window x:Class="DoAn_IT008.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DoAn_IT008"
+        mc:Ignorable="d"
+        Title="Quản lý bán vé sự kiện"
+		Width="1250" Height="720"
+		MinWidth="950" MinHeight="600"
+		WindowStartupLocation="CenterScreen"
+		 Background="#F0F4F8">
+	<Window.Resources>
+		<LinearGradientBrush x:Key="SidebarBrush" StartPoint="0,0" EndPoint="0,1">
+			<GradientStop Color="#004B38" Offset="0" />
+			<GradientStop Color="#006347" Offset="1" />
+		</LinearGradientBrush>
+		<SolidColorBrush x:Key="PrimaryBrush" Color="#00B982" />
+		<SolidColorBrush x:Key="BorderBrush" Color="#E5E7EB" />
+
+		<Style x:Key="NavButton" TargetType="Button">
+			<Setter Property="Background" Value="Transparent" />
+			<Setter Property="Foreground" Value="White" />
+			<Setter Property="HorizontalContentAlignment" Value="Left" />
+			<Setter Property="Padding" Value="16,10" />
+			<Setter Property="BorderThickness" Value="0" />
+			<Setter Property="Cursor" Value="Hand" />
+		</Style>
+
+		<Style x:Key="EventCard" TargetType="Border">
+			<Setter Property="Width" Value="260" />
+			<Setter Property="Margin" Value="0,0,16,18" />
+			<Setter Property="Background" Value="White" />
+			<Setter Property="CornerRadius" Value="12" />
+			<Setter Property="BorderBrush" Value="#E5ECF3" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="ClipToBounds" Value="True" />
+			<Setter Property="Effect">
+				<Setter.Value>
+					<DropShadowEffect Color="#64748B" BlurRadius="14" ShadowDepth="4" Opacity="0.10" />
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" Value="#ECFDF5" />
+					<Setter Property="BorderBrush" Value="#00B982" />
+					<Setter Property="Effect">
+						<Setter.Value>
+							<DropShadowEffect Color="#00A873" BlurRadius="20" ShadowDepth="6" Opacity="0.20" />
+						</Setter.Value>
+					</Setter>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<!-- Thanh sidebar -->
+		<Border Grid.Column="0" Width="210" Background="{StaticResource SidebarBrush}">
+			<DockPanel Margin="16,20,16,16">
+
+				<!-- Logo -->
+				<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,28">
+					<Border Width="44" Height="44" CornerRadius="10" Background="#00B982">
+						<TextBlock Text="&#xE8BF;" FontFamily="Segoe MDL2 Assets" FontSize="20"
+                               Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+					</Border>
+					<StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+						<TextBlock Text="EventTicket" FontSize="18" FontWeight="Bold" Foreground="White" />
+						<TextBlock Text="Hệ thống bán vé" FontSize="12" Foreground="#A7F3D0" />
+					</StackPanel>
+				</StackPanel>
+
+				<!-- Đăng xuất -->
+				<Border DockPanel.Dock="Bottom" CornerRadius="10" Background="#008F68" Margin="0,8,0,0">
+					<Button Click="Nav_Click" Tag="Home"
+                        Style="{StaticResource NavButton}" HorizontalContentAlignment="Center"
+                        Padding="0,12" FontWeight="SemiBold">
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<TextBlock Text="&#xE8AC;" FontFamily="Segoe MDL2 Assets"
+                                   FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0" />
+							<TextBlock Text="Đăng xuất" VerticalAlignment="Center" />
+						</StackPanel>
+					</Button>
+				</Border>
+
+				<!-- Người đăng nhập -->
+				<Border DockPanel.Dock="Bottom" CornerRadius="10" Background="#003F30" Padding="12" Margin="0,0,0,12">
+					<StackPanel Orientation="Horizontal">
+						<Border Width="40" Height="40" CornerRadius="20" Background="#42C99A">
+							<TextBlock Text="AD" FontWeight="Bold" Foreground="#004B38"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+						</Border>
+						<StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+							<TextBlock Text="Quản trị viên" FontWeight="SemiBold" Foreground="White" />
+							<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,2,0,0">
+								<Ellipse Width="7" Height="7" Fill="#34D399" VerticalAlignment="Center" />
+								<TextBlock Text="Đang hoạt động" FontSize="11" Foreground="#A7F3D0" Margin="5,0,0,0" />
+							</StackPanel>
+						</StackPanel>
+					</StackPanel>
+				</Border>
+
+				<StackPanel>
+					<TextBlock Text="DANH MỤC CHÍNH" FontSize="12" FontWeight="SemiBold" Foreground="#6EE7B7" Margin="6,0,0,10" />
+					<Button x:Name="BtnNavHome" Style="{StaticResource NavButton}" Background="#00B982" Click="Nav_Click" Tag="Home">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="&#xE80F;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" Width="26" />
+							<TextBlock Text="Trang chủ" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" />
+						</StackPanel>
+					</Button>
+					<Button x:Name="BtnNavMyInfo" Style="{StaticResource NavButton}" Click="Nav_Click" Tag="MyInfo">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" Width="26" />
+							<TextBlock Text="Thông tin cá nhân" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" />
+						</StackPanel>
+					</Button>
+					<Button x:Name="BtnNavTickets" Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Tickets">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="&#xE8BF;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" Width="26" />
+							<TextBlock Text="Vé của tôi" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" />
+						</StackPanel>
+					</Button>
+
+					<StackPanel>
+						<TextBlock Text="QUẢN TRỊ HỆ THỐNG" FontSize="12" FontWeight="SemiBold" Foreground="#6EE7B7" Margin="6,24,0,10" />
+						<Button x:Name="BtnNavAdminUsers" Style="{StaticResource NavButton}" Click="Nav_Click" Tag="AdminUsers">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="&#xE716;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" Width="26" />
+								<TextBlock Text="Quản lý user" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" />
+							</StackPanel>
+						</Button>
+						<Button x:Name="BtnNavAdminEvents" Style="{StaticResource NavButton}" Click="Nav_Click" Tag="AdminEvents">
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" Width="26" />
+								<TextBlock Text="Quản lý sự kiện" FontSize="14" FontWeight="Medium" VerticalAlignment="Center" />
+							</StackPanel>
+						</Button>
+					</StackPanel>
+				</StackPanel>
+			</DockPanel>
+		</Border>
+
+		<!-- Vùng nội dung -->
+		<Grid Grid.Column="1">
+
+
+			<Grid x:Name="ScreenHome" Margin="24" Visibility="Visible" />
+			<Grid x:Name="ScreenMyInfo" Margin="24" Visibility="Collapsed" />
+			<Grid x:Name="ScreenTickets" Margin="24" Visibility="Collapsed" />
+			<Grid x:Name="ScreenAdminUsers" Margin="24" Visibility="Collapsed" />
+			<Grid x:Name="ScreenAdminEvents" Margin="24" Visibility="Collapsed" />
+
+		</Grid>
+	</Grid>
+</Window>
